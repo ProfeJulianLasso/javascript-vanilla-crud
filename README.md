@@ -7,5 +7,5 @@ No olvidar copiar y pegar la carpeta pb_data donde se encuentra el ejecutable de
 
 ## Usuario
 
-- julian.lasso@gmail.com
+- julian.lasso@sofka.com.co
 - 1234567890
