@@ -24,25 +24,64 @@ export class FormularioUsurio {
         const inputTelefono = this.#privateInputWithLabel('telefono', 'Telefono', 'phone', 'Digite su teléfono', false, data.telefono);
         const buttons = this.#privateButtons();
 
-        form.innerHTML = inputID + inputNombre + inputApellido + inputCorreo + inputTelefono + buttons;
+        form.append(inputID, inputNombre, inputApellido, inputCorreo, inputTelefono, buttons);
+        // form.innerHTML = inputID + inputNombre + inputApellido + inputCorreo + inputTelefono + buttons;
         this.#privateFormulario = form;
     }
 
     #privateInputWithLabel(id, label, type, placeholder, required, value) {
-        return `<div class="mb-3">
-        <label for="${id}" class="form-label">${label}</label>
-        <input type="${type}" class="form-control" id="${id}" name="${id}" placeholder="${placeholder} ${required ? "required" : ''}" value="${value ? value : null}">
-        </div>`;
+        const div = document.createElement('div');
+        div.classList.add('mb-3');
+
+        const lblLabel = document.createElement('label');
+        lblLabel.htmlFor = id;
+        lblLabel.classList.add('form-label');
+        lblLabel.textContent = label;
+
+        const input = document.createElement('input');
+        input.type = type;
+        input.classList.add('form-control');
+        input.id = id;
+        input.name = id;
+        input.placeholder = placeholder;
+        if (required) input.required = true;
+        if (value) input.value = value;
+
+        div.append(lblLabel, input);
+        return div;
+        // return `<div class="mb-3">
+        // <label for="${id}" class="form-label">${label}</label>
+        // <input type="${type}" class="form-control" id="${id}" name="${id}" placeholder="${placeholder} ${required ? "required" : ''}" value="${value ? value : null}">
+        // </div>`;
     }
 
     #privateInput(id, type, value) {
-        return `<input type="${type}" id="${id}" name="${id}" value="${value ? value : ''}">`;
+        const input = document.createElement('input');
+        input.type = type;
+        input.id = id;
+        input.name = id;
+        if (value) input.value = value;
+        return input;
+        // return `<input type="${type}" id="${id}" name="${id}" value="${value ? value : ''}">`;
     }
 
     #privateButtons() {
-        return `<div>
-            <button type="button" class="btn btn-primary">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Modificar</button>
-        </div>`;
+        const div = document.createElement('div');
+
+        const btnCancelar = document.createElement('button');
+        btnCancelar.classList.add('btn', 'btn-primary');
+        btnCancelar.textContent = 'Cancelar';
+
+        const btnSubmit = document.createElement('button');
+        btnSubmit.classList.add('btn', 'btn-primary');
+        btnSubmit.textContent = 'Modificar';
+
+        div.append(btnCancelar, btnSubmit);
+        return div;
+
+        // return `<div>
+        //     <button type="button" class="btn btn-primary">Cancelar</button>
+        //     <button type="submit" class="btn btn-primary">Modificar</button>
+        // </div>`;
     }
 }
